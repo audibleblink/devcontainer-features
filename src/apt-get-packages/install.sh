@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -ex
 
+# Ensure apt is in non-interactive to avoid prompts
+export DEBIAN_FRONTEND=noninteractive
+
 PACKAGES="${PACKAGES:-""}"
 
 # Clean up
@@ -12,8 +15,7 @@ if [ -z "$PACKAGES" ]; then
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
-	echo -e 'Script must be run as 
-    root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
+	echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
 	exit 1
 fi
 
